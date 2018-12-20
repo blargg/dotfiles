@@ -1,0 +1,9 @@
+*mylatex.txt* My basic latex helpers
+Basic plugin for using latex.
+
+
+example:
+" add this to your .vimrc
+" latex settings
+nmap <silent> <leader>ll :call g:LaTexCompile()<CR>
+nmap <silent> <leader>lv :call g:LaTexShowPDF()<CR>
