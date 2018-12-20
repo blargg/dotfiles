@@ -1,0 +1,10 @@
+# compiled soure files
+*.o
+*.so
+*.pyc
+
+*.swp
+__pycache__
+
+# other data
+tags

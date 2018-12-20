@@ -1,0 +1,23 @@
+[user]
+	name = blargg
+	email = tomjankauski@gmail.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[merge]
+	tool = fugitive
+[credential]
+	helper = cache
+[alias]
+	l = log --graph --pretty=format:'%C(yellow)%h%Creset%C(cyan)%d%Creset %C(white bold)%s%Creset %C(white dim)(by %an %ar)%Creset' --all
+	ll = !git l --all
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
+[color]
+	ui = auto
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"

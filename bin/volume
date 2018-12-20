@@ -1,0 +1,58 @@
+#!/bin/bash
+# uses amixer to raise master volume then
+# shortly displays volume with dzen2
+
+GRAPHICAL=true
+
+BG='#000'
+FG='#aaa'
+W=150          #with the the dzen bar
+GW=50          #width of the volume gauge
+GH=7
+GFG='#a8a3f5'
+GBG='#333'
+X=1000          # x-position
+Y=800          # y-position
+#FN=           # font
+
+if [[ $1 == "up" ]]
+then
+				amixer set Master 5%+ >/dev/null
+elif [[ $1 == "down" ]]
+then
+				amixer set Master 5%- >/dev/null
+elif [[ $1 == "mute" ]]
+then
+				amixer set Master toggle >/dev/null
+else
+				echo "$1 is not a valid option"
+fi
+
+
+
+# Check to see if we should display
+if $GRAPHICAL && command -v dzen2 >/dev/null ; then
+	echo "volume: display"
+else
+	echo "don't display"
+	exit
+fi
+
+STATUS=$(amixer get Master)
+
+CAPTION=$(echo "$STATUS" | grep %)
+CAPTION=${CAPTION%\%*}
+CAPTION=${CAPTION#*[}
+CAPTION=$(echo $CAPTION | gdbar -h $GH -w $GW -fg $GFG -bg $GBG)
+
+# Check if the Master channel is mute using grep for [on] and the exit status of the grep command
+echo -n "$STATUS" | grep '\[on\]' > /dev/null
+# there's a better way to do this...
+if [ $? == 0 ]
+then
+				CAPTION="^i(/home/tom/bin/volume.xbm) $CAPTION"
+else
+				CAPTION="^i(/home/tom/bin/mute.xbm) $CAPTION"
+fi
+
+(echo "$CAPTION"; sleep 2) | dzen2 -ta c -tw $W -y $Y -x $X -fg $FG -bg $BG
