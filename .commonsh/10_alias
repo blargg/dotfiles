@@ -1,0 +1,10 @@
+#! /bin/sh
+# aliases for all shells
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias cdh='urxvt -cd $(pwd) &'
+alias sys='systemctl'
+alias ssys='sudo systemctl'
+
+alias nix-ipython='nix-shell --run ipython'

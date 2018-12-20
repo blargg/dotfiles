@@ -1,0 +1,95 @@
+# completion menu
+zstyle ':completion:*' menu select=1
+
+# change the order up
+zstyle ':completion:*:(cd|mv|cp):*' tag-order local-directories directory-stack named-directories path-directories
+
+# man page completion
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.*'  insert-sections true
+
+# neat-o new features
+zstyle ':completion:*' completer _expand _complete _prefix _match
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:8:approximate:*' max-errors 1 numeric
+
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:matches' group 'yes'
+
+# caching
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/.cache
+zstyle ':vcs_info:*' enable git cvs svn
+
+# make menus for pacman
+zstyle ':completion:*:*:pacman:*'	menu yes select
+zstyle ':completion:*:pacman:*'	force-list always
+
+# make menus for pacman
+zstyle ':completion:*:*:make:*'	menu yes select
+zstyle ':completion:*:make:*'	force-list always
+
+# colors on completions
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# descriptions
+zstyle ':completion:*:messages' format $'%{\e[01;35m%} -- %d -- %{\e[00;00m%}'
+zstyle ':completion:*:warnings' format $'%{\e[01;31m%} -- No Matches Found -- %{\e[00;00m%}'
+zstyle ':completion:*:descriptions' format $'%{\e[01;33m%} -- %d -- %{\e[00;00m%}'
+
+# job numbers
+zstyle ':completion:*:jobs' numbers true
+
+# kill/killall menu and general process listing
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:*:kill:*' sort false
+zstyle ':completion:*:processes' list-colors '=(#b) #([0-9]#)*=0=31;31'
+
+zstyle ':completion:*:*:killall:*' menu yes select
+
+case `uname -s` in
+	Linux)
+		zstyle ':completion:*processes' command 'ps --forest -U '${USERNAME}' -o pid,args | sed "/ps --forest -U '${USERNAME}' -o pid,args/d"'
+	;;
+	Interix)
+		zstyle ':completion:*processes' command 'ps -i -U '${USERNAME}' -o pid,args | sed "/ps -i -U '${USERNAME}' -o pid,args/d"'
+	;;
+	CYGWIN*)
+		zstyle ':completion:*processes' command 'ps -u '${USERNAME}' -s | sed "/ps -u '${USERNAME}' -s/d"'
+	;;
+	SunOS|FreeBSD|OpenBSD)
+		zstyle ':completion:*processes' command 'ps -U '${USERNAME}' -o pid,args | sed "/ps -U '${USERNAME}' -o pid,args/d"'
+	;;
+	Darwin)
+		zstyle ':completion:*processes' command 'ps -U '${USERNAME}' -o pid,command | sed "/ps -U '${USERNAME}' -o pid/d"'
+	;;
+esac
+
+case `uname -s` in
+	Interix|SunOS|FreeBSD|Linux)
+		zstyle ':completion:*:processes-names' command "ps -U '${USERNAME}' -o comm"
+	;;
+	CYGWIN*)
+		zstyle ':completion:*:processes-names' command "ps -u '${USERNAME}' -s"
+	;;
+	Darwin)
+		if [[ `sw_vers -productVersion` = 10<5->.<-> ]] ; then
+			zstyle ':completion:*:processes-names' command "ps -U '${USERNAME}' -o comm"
+		else
+			zstyle ':completion:*:processes-names' command "ps -U '${USERNAME}' -o command"
+		fi
+	;;
+	OpenBSD)
+		zstyle ':completion:*:processes-names' command "ps -U '${USERNAME}' -o command"
+	;;
+esac
+
+# dont suggest the first parameter again
+zstyle ':completion:*:ls:*' ignore-line yes
+zstyle ':completion:*:rm:*' ignore-line yes
+zstyle ':completion:*:scp:*' ignore-line yes
+zstyle ':completion:*:diff:*' ignore-line yes
+zstyle ':completion:*:kill:*' ignore-line yes
+
