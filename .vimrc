@@ -112,19 +112,6 @@ if has('eval')
    filetype plugin on      " Load filetype plugins
 endif
 
-" ---- Folding ----
-if has('eval')
-   let g:detectindent_preferred_expandtab = 0
-   let g:detectindent_preferred_indent = 4
-
-   fun! <SID>DetectDetectIndent()
-      try
-         :DetectIndent
-      catch
-      endtry
-   endfun
-endif
-
 "TODO consider moving this to ftplugin files
 if has('autocmd')
    autocmd FileType html,htmldjango setlocal foldmethod=indent
@@ -132,10 +119,6 @@ endif
 
 
 if has('autocmd')
-   if has('eval')
-      "autocmd BufReadPost * :call s:DetectDetectIndent()
-   endif
-
    if has('viminfo')
       autocmd BufReadPost *
          \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -420,10 +403,6 @@ endfunction
 
 nnoremap <silent> <F2> :call g:ToggleColorColumn() <CR>
 inoremap <silent> <F2> <C-O>:call g:ToggleColorColumn() <CR>
-
-" latex settings
-nmap <silent> <leader>ll :call g:LaTexCompile()<CR>
-nmap <silent> <leader>lv :call g:LaTexShowPDF()<CR>
 
 " airline
 let g:airline_theme='murmur'
