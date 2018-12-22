@@ -87,6 +87,9 @@ set visualbell             " Turn visual bell on
 set t_vb=                  " Make the visual bell emit nothing
 set showcmd                " Show the current command
 set secure                 " Be safe when using modeline and files
+set diffopt+=vertical
+set nomodeline             " Disable modeline
+set completeopt=menu,menuone,longest
 "set exrc                   " Load the .vimrc in the current folder too
 
 let mapleader=" "    " Set leader to space
@@ -95,21 +98,12 @@ if v:version > 703
    set formatoptions+=j
 endif
 
-" --- Command-t options ---
-let g:CommandTMaxHeight=10
-
-set diffopt+=iwhite
 
 " ---- Filetypes ----
-if has('syntax')
-   syntax on
-endif
-
-if has('eval')
-   filetype on             " Detect filetype by extension
-   filetype indent on      " Enable indents based on extensions
-   filetype plugin on      " Load filetype plugins
-endif
+syntax on
+filetype on             " Detect filetype by extension
+filetype indent on      " Enable indents based on extensions
+filetype plugin on      " Load filetype plugins
 
 " Open file to last spot
 if has('autocmd')
@@ -138,14 +132,6 @@ set laststatus=2
 set shortmess=atI
 if has('statusline')
    set statusline=%{fugitive#statusline()}%<%F\ %r[%{&ff}]%y%m\ %=\ Line\ %l\/%L\ Col:\ %v\ (%P)
-endif
-
-" Enable modelines only on secure vim
-if (v:version == 603 && has("patch045")) || (v:version > 603)
-   set modeline
-   set modelines=3
-else
-   set nomodeline
 endif
 
 " Set colorscheme
@@ -197,19 +183,6 @@ nmap <c-t> :NERDTreeToggle<CR>
 " Clear search colors
 nmap <silent> <leader>n :silent :nohlsearch<CR>
 
-" improved lookup
-if has('eval')
-   fun! GoDefinition()
-      let pos = getpos(".")
-      normal! gd
-      if getpos(".") == pos
-         exe "tag " . expand("<cword>")
-      endif
-   endfun
-
-   nmap <C-]> :call GoDefinition()<CR>
-endif
-
 " shifted arrows are stupid
 inoremap <S-Up> <C-O>gk
 noremap  <S-Up> gk
@@ -235,11 +208,6 @@ if (&term =~ "^xterm")
    map! <C-[>[5C <C-Right>
 endif
 
-" ---- OmniCpp ----
-if v:version >= 700
-   set completeopt=menu,menuone,longest
-endif
-
 set t_RV=
 
 " Toggle colorcolumn
@@ -262,13 +230,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ale_linters = {
    \ 'haskell': ['ghc-mod', 'hlint', 'hie', 'hdevtools']
    \}
-
-" control-p
-let g:ctrlp_prompt_mappings = {
-   \ 'PrtClearCache()':      ['<c-w>'],
-   \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
-   \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-   \ }
 
 " fzf settings
 nmap <c-p> :Files<CR>
