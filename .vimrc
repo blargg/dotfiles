@@ -37,6 +37,7 @@ Plugin 'tomasr/molokai'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/wombat256.vim'
+Plugin 'vim-scripts/Wombat'
 
 " Vim plugins
 Plugin 'LnL7/vim-nix'
@@ -167,32 +168,15 @@ else
    set nomodeline
 endif
 
-" Shamelessly stolen from Ciaran McCreesh <ciaranm@ciaranm.org>
-if has('eval')
-   fun! LoadColorScheme(schemes)
-      let l:schemes = a:schemes . ":"
-
-      while l:schemes != ""
-         let l:scheme = strpart(l:schemes, 0, stridx(l:schemes, ":"))
-         let l:schemes = strpart(l:schemes, stridx(l:schemes, ":") + 1)
-
-         try
-            exec "colorscheme" l:scheme
-            break
-         catch
-         endtry
-      endwhile
-   endfun
-
-   if has("gui_running")
-      call LoadColorScheme("wombat256:wombat:molokai")
-   elseif &t_Co == 256
-      call LoadColorScheme("wombat256:wombat:molokai")
-   elseif &t_Co == 88
-      call LoadColorScheme("wombat:zellner")
-   else
-      call LoadColorScheme("desert:darkblue:zellner")
-   endif
+" Set colorscheme
+if has("gui_running")
+   colorscheme wombat256mod
+elseif &t_Co == 256
+   colorscheme wombat256mod
+elseif &t_Co == 88
+   colorscheme wombat
+else
+   colorscheme wombat
 endif
 
 " Show trailing whitespace visually
