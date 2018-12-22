@@ -1,5 +1,4 @@
 " vimrc
-" Original author: Saleem Abdulrasool <compnerd@compnerd.org>
 " vim: set ts=3 sw=3 et nowrap:
 
 if has('multi_byte')      " Make sure we have unicode support
@@ -76,7 +75,7 @@ set lazyredraw             " Lazy Redraw (faster macro execution)
 set foldmethod=syntax      " Fold based on syntax
 set foldlevel=10           " Don't start folding until it gets deep
 set wildmenu               " Menu on completion please
-set wildmode=longest,full  " Match the longest substring, complete with first
+set wildmode=longest:full,full  " Match the longest substring, complete with first
 set wildignore=*.o,*~      " Ignore temp files in wildmenu
 set scrolloff=3            " Show 3 lines of context during scrolls
 set sidescrolloff=2        " Show 2 columns of context during scrolls
@@ -88,9 +87,9 @@ set visualbell             " Turn visual bell on
 set t_vb=                  " Make the visual bell emit nothing
 set showcmd                " Show the current command
 set secure                 " Be safe when using modeline and files
-set exrc                   " Load the .vimrc in the current folder too
+"set exrc                   " Load the .vimrc in the current folder too
 
-let mapleader=" "    " Set leader to splace
+let mapleader=" "    " Set leader to space
 
 if v:version > 703
    set formatoptions+=j
@@ -112,12 +111,7 @@ if has('eval')
    filetype plugin on      " Load filetype plugins
 endif
 
-"TODO consider moving this to ftplugin files
-if has('autocmd')
-   autocmd FileType html,htmldjango setlocal foldmethod=indent
-endif
-
-
+" Open file to last spot
 if has('autocmd')
    if has('viminfo')
       autocmd BufReadPost *
@@ -166,7 +160,6 @@ else
 endif
 
 " Show trailing whitespace visually
-" Shamelessly stolen from Ciaran McCreesh <ciaranm@gentoo.org>
 if (&termencoding == "utf-8") || has("gui_running")
    if v:version >= 700
       set list listchars=tab:»·,trail:·,extends:…,nbsp:‗
@@ -189,29 +182,6 @@ endif
 if has('autocmd')
    " always refresh syntax from the start
    autocmd BufEnter * syntax sync fromstart
-
-   " subversion commit messages need not be backed up
-   autocmd BufRead svn-commit.tmp :setlocal nobackup
-
-   " mutt does not like UTF-8
-   autocmd BufRead,BufNewFile *
-      \ if &ft == 'mail' | set fileencoding=iso8859-1 | endif
-
-   " fix up procmail rule detection
-   autocmd BufRead procmailrc :setfiletype procmail
-endif
-
-" ---- cscope/ctags setup ----
-if has('cscope') && executable('cscope') == 1
-   " Search cscope and ctags, in that order
-   set cscopetag
-   set cscopetagorder=0
-
-   set nocsverb
-   if filereadable('cscope.out')
-      cs add cscope.out
-   endif
-   set csverb
 endif
 
 " ---- Key Mappings ----
@@ -223,8 +193,6 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 nmap <c-t> :NERDTreeToggle<CR>
-
-" Ropevim python code navigation
 
 " Clear search colors
 nmap <silent> <leader>n :silent :nohlsearch<CR>
@@ -242,86 +210,11 @@ if has('eval')
    nmap <C-]> :call GoDefinition()<CR>
 endif
 
-if has('autocmd')
-   " Shortcuts
-   if has('eval')
-      fun! <SID>cabbrev()
-         iab #i #include
-         iab #I #include
-
-         iab #d #define
-         iab #D #define
-
-         iab #e #endif
-         iab #E #endif
-      endfun
-
-      autocmd FileType c,cpp :call <SID>cabbrev()
-
-      autocmd BufNewFile,BufRead wscript set filetype=python syntax=python
-      autocmd BufNewFile,BufRead *.mm set filetype=noweb
-      autocmd BufNewFile,BufRead *.scala set filetype=scala
-      autocmd BufNewFile,BufRead *.proto set filetype=proto
-      autocmd BufNewFile,BufRead *.atomo set filetype=atomo
-      autocmd BufNewFile,BufRead *.atomo setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 commentstring=--\ %s
-
-      autocmd FileType python set omnifunc=pythoncomplete#Complete
-      let g:SuperTabDefaultCompletionType = "context"
-   endif
-
-   " make tab reindent in normal mode
-   autocmd FileType c,cpp,cs,java nmap <Tab> =0<CR>
-endif
-
-" Append modeline after last line in buffer.
-" Use substitute() (not printf()) to handle '%%s' modeline in LaTeX files.
-if has('eval')
-   fun! AppendModeline()
-      let save_cursor = getpos('.')
-      let append = ' vim: set ts='.&tabstop.' sw='.&shiftwidth.' tw='.&textwidth.': '
-      $put =substitute(&commentstring, '%s', append, '')
-      call setpos('.', save_cursor)
-   endfun
-   nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-endif
-
 " shifted arrows are stupid
 inoremap <S-Up> <C-O>gk
 noremap  <S-Up> gk
 inoremap <S-Down> <C-O>gj
 noremap  <S-Down> gj
-
-" Y should yank to EOL
-map Y y$
-
-" vK is stupid
-vmap K k
-
-" :W and :Q are annoying
-if has('user_commands')
-   command! -nargs=0 -bang Q q<bang>
-   command! -nargs=0 -bang W w<bang>
-   command! -nargs=0 -bang WQ wq<bang>
-   command! -nargs=0 -bang Wq wq<bang>
-endif
-
-" just continue
-nmap K K<cr>
-
-" stolen from auctex.vim
-if has('eval')
-   fun! EmacsKill()
-      if col(".") == strlen(getline(line(".")))+1
-         let @" = "\<CR>"
-         return "\<Del>"
-      else
-         return "\<C-O>D"
-      endif
-   endfun
-endif
-
-" w!! for sudo w!
-"cmap w!! w !sudo tee % >/dev/null
 
 " Disable q and Q
 map q <Nop>
@@ -330,22 +223,6 @@ map Q <Nop>
 " Toggle numbers with F12
 nmap <silent> <F12> :silent set number!<CR>
 imap <silent> <F12> <C-O>:silent set number!<CR>
-
-" Don't force column 0 for #
-inoremap # X<BS>#
-
-if (&term =~ "interix")
-   map  <C-?> <DEL>
-   map! <C-?> <DEL>
-   map <C-[>[H <Home>
-   map <C-[>[U <End>
-elseif (&term =~ "^sun")
-   map  <C-?> <DEL>
-   map! <C-?> <DEL>
-elseif (&term !~ "cons")
-   map  <C-?> <BS>
-   map! <C-?> <BS>
-endif
 
 if (&term =~ "^xterm")
    map  <C-[>[H <Home>
@@ -358,22 +235,11 @@ if (&term =~ "^xterm")
    map! <C-[>[5C <C-Right>
 endif
 
-" Terminal.app does not support back color erase
-if ($TERM_PROGRAM ==# "Apple_Terminal" && $TERM_PROGRAM_VERSION <= 273)
-   set t_ut=
-endif
-
-" Python specific stuff
-if has('eval')
-   let python_highlight_all = 1
-   let python_slow_sync = 1
-endif
-
 " ---- OmniCpp ----
 if v:version >= 700
-   if has('autocmd')
-      autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-   endif
+   " if has('autocmd')
+   "    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+   " endif
 
    set completeopt=menu,menuone,longest
 
