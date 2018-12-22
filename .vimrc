@@ -42,7 +42,10 @@ Plugin 'vim-scripts/Wombat'
 " Vim plugins
 Plugin 'LnL7/vim-nix'
 Plugin 'Shougo/vimproc'
+
+" haskell plugins
 Plugin 'eagletmt/ghcmod-vim'
+Plugin 'neovimhaskell/haskell-vim'
 
 " fzf
 Plugin 'junegunn/fzf',{'dir':'~/.fzf','do':'./install --all'}
