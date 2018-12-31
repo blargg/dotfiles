@@ -43,7 +43,7 @@ Plugin 'LnL7/vim-nix'
 Plugin 'Shougo/vimproc'
 
 " haskell plugins
-Plugin 'eagletmt/ghcmod-vim'
+" Plugin 'eagletmt/ghcmod-vim'
 Plugin 'neovimhaskell/haskell-vim'
 
 " fzf
@@ -136,9 +136,9 @@ endif
 
 " Set colorscheme
 if has("gui_running")
-   colorscheme wombat256mod
+   colorscheme molokai
 elseif &t_Co == 256
-   colorscheme wombat256mod
+   colorscheme molokai
 elseif &t_Co == 88
    colorscheme wombat
 else
