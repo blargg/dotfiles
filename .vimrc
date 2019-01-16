@@ -22,7 +22,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " General Plugins
+Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
+Plugin 'blindFS/vim-taskwarrior'
 Plugin 'chrisbra/Recover.vim'
+Plugin 'chrisbra/SudoEdit.vim'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tcomment_vim'
@@ -77,7 +80,7 @@ set foldlevel=10           " Don't start folding until it gets deep
 set wildmenu               " Menu on completion please
 set wildmode=longest:full,full  " Match the longest substring, complete with first
 set wildignore=*.o,*~      " Ignore temp files in wildmenu
-set scrolloff=3            " Show 3 lines of context during scrolls
+set scrolloff=5            " Show lines of context during scrolls
 set sidescrolloff=2        " Show 2 columns of context during scrolls
 set backspace=2            " Normal backspace behavior
 set textwidth=80           " Break lines at 80 characters
@@ -230,6 +233,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ale_linters = {
    \ 'haskell': ['ghc-mod', 'hlint', 'hie', 'hdevtools']
    \}
+let g:ale_haskell_hie_executable = 'hie-wrapper'
 
 " fzf settings
 nmap <c-p> :Files<CR>
@@ -253,6 +257,20 @@ augroup tags
    au BufWritePost *.hs       silent! !fast-tags %
    au BufWritePost *.hsc      silent! !fast-tags %
 augroup END
+
+" LanguageClient
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
+map <Leader>lg :call LanguageClient#textDocument_definition()<CR>
+map <Leader>lr :call LanguageClient#textDocument_rename()<CR>
+map <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
+map <Leader>lb :call LanguageClient#textDocument_references()<CR>
+map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
+map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['hie-wrapper', '--lsp'],
+    \ }
 
 " GHC mod
 nmap <leader>tt :GhcModType<CR>
