@@ -148,20 +148,7 @@ else
    colorscheme wombat
 endif
 
-" Show trailing whitespace visually
-if (&termencoding == "utf-8") || has("gui_running")
-   if v:version >= 700
-      set list listchars=tab:»·,trail:·,extends:…,nbsp:‗
-   else
-      set list listchars=tab:»·,trail:·,extends:…
-   endif
-else
-   if v:version >= 700
-      set list listchars=tab:>-,trail:.,extends:>,nbsp:_
-   else
-      set list listchars=tab:>-,trail:.,extends:>
-   endif
-endif
+set list listchars=tab:»·,trail:·,extends:…,nbsp:‗
 
 if has('mouse')
    " Dont copy the listchars when copying
@@ -268,12 +255,6 @@ map <Leader>lb :call LanguageClient#textDocument_references()<CR>
 map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie-wrapper', '--lsp'],
-    \ }
-
-" GHC mod
-nmap <leader>tt :GhcModType<CR>
-nmap <leader>tc :GhcModTypeClear<CR>
-nmap <leader>ti :GhcModTypeInsert<CR>
-nmap <leader>cc :GhcModSplitFunCase<CR>
+" let g:LanguageClient_serverCommands = {
+"     \ 'haskell': ['hie-wrapper', '--lsp'],
+"     \ }
