@@ -46,8 +46,8 @@ Plugin 'LnL7/vim-nix'
 Plugin 'Shougo/vimproc'
 
 " haskell plugins
-" Plugin 'eagletmt/ghcmod-vim'
 Plugin 'neovimhaskell/haskell-vim'
+Plugin 'dan-t/vim-hsimport'
 
 " fzf
 Plugin 'junegunn/fzf',{'dir':'~/.fzf','do':'./install --all'}
@@ -258,3 +258,7 @@ map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 " let g:LanguageClient_serverCommands = {
 "     \ 'haskell': ['hie-wrapper', '--lsp'],
 "     \ }
+
+" Haskell Import
+autocmd FileType haskell nmap <leader>im :silent update <bar> HsimportModule<CR>
+autocmd FileType haskell nmap <leader>is :silent update <bar> HsimportSymbol<CR>
