@@ -22,7 +22,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " General Plugins
-Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
+" Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
 Plugin 'blindFS/vim-taskwarrior'
 Plugin 'chrisbra/Recover.vim'
 Plugin 'chrisbra/SudoEdit.vim'
