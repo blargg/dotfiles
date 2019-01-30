@@ -21,8 +21,7 @@ import XMonad.Layout.ToggleLayouts
 import JackStack
 
 main = do
-    xmproc <- spawnPipe "~/bin/xmobar"
-    xmonad $ myConfig xmproc
+    xmonad myConfig
 
 modm = mod1Mask
 
@@ -36,18 +35,14 @@ myLayout =  setOptions $ tiled ||| JackStack (3/4)
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1..9::Int]
 
-myConfig pipeproc = ewmh . addAllMyKeys $ myConfig'
+myConfig = ewmh . addAllMyKeys $ myConfig'
     where myConfig' = def
                         { terminal = "urxvt"
                         , workspaces = myWorkspaces
-                        , manageHook = manageDocks <+> myManageHook
+                        , manageHook = manageDocks
                         , handleEventHook = handleEventHook def <+> fullscreenEventHook
                         , layoutHook = myLayout
                         , modMask = modm
-                        , logHook = dynamicLogWithPP xmobarPP
-                            { ppOutput = hPutStrLn pipeproc
-                            , ppTitle = xmobarColor "green" "" . shorten 50
-                            }
                         }
 
 addAllMyKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stringKeys
@@ -55,15 +50,12 @@ addAllMyKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stri
           stringKeys = myMediaKeys
 
 myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
-         , ((modm, xK_a), goToSelected def)
+         , ((modm, xK_d), changeDir myXPConfig)
          , ((controlMask, xK_Print), spawn "~/bin/screenshot win")
          , ((0, xK_Print), spawn "~/bin/screenshot scr")
          , ((modm, xK_p), shellPrompt myXPConfig)
-         , ((modm .|. shiftMask, xK_a), changeDir myXPConfig)
          , ((modm, xK_b), sendMessage ToggleStruts)
-         , ((modm .|. controlMask, xK_backslash), spawn "sudo /usr/bin/systemctl suspend")
          , ((mod4Mask, xK_w), raiseBrowser)
-         , ((modm .|. shiftMask, xK_o), restart "/home/tom/bin/changewm" True)
          , ((modm, xK_f), sendMessage (Toggle "Full"))
          ]
 
@@ -82,9 +74,6 @@ myMediaKeys =
     , ("<XF86AudioRaiseVolume>", spawn "~/bin/volume up")
     , ("<XF86AudioMute>", spawn "~/bin/volume mute")
     ]
-
-myManageHook = composeAll
-    [ className =? "MPlayer" --> doFloat ]
 
 myXPConfig = def
                 { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
