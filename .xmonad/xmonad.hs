@@ -43,6 +43,7 @@ myConfig = ewmh . addAllMyKeys $ myConfig'
                         , handleEventHook = handleEventHook def <+> fullscreenEventHook
                         , layoutHook = myLayout
                         , modMask = modm
+                        , focusFollowsMouse = False
                         }
 
 addAllMyKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stringKeys
