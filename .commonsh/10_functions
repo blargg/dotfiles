@@ -1,5 +1,4 @@
 # /bin/sh
-# password generator
 
 # runs ranger and changes directory of the shell to match
 function ranger-cd {
@@ -12,6 +11,7 @@ function ranger-cd {
 	rm -f -- "$tempfile"
 }
 
+# password generator
 function genpass() {
 	if [ ! "$1" ]; then
 		echo "Usage: $0 20"
