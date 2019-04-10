@@ -1,3 +1,6 @@
+import System.Directory (setCurrentDirectory, getHomeDirectory)
+import System.IO
+
 import XMonad
 import qualified XMonad.StackSet as W
 import XMonad.Hooks.DynamicLog
@@ -8,14 +11,13 @@ import XMonad.Util.EZConfig(additionalKeys, additionalKeysP)
 import XMonad.Actions.GridSelect
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.WindowGo
-import System.IO
+import XMonad.Util.Run
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 
 import XMonad.Layout
 import XMonad.Layout.NoBorders
-import XMonad.Layout.WorkspaceDir
 import XMonad.Layout.ToggleLayouts
 
 import JackStack
@@ -26,7 +28,7 @@ main = do
 modm = mod1Mask
 
 myLayout =  setOptions $ tiled ||| JackStack (3/4)
-    where setOptions = workspaceDir "~" . smartBorders . avoidStruts . toggleLayouts Full
+    where setOptions = smartBorders . avoidStruts . toggleLayouts Full
           tiled = Tall nmaster delta ratio
           nmaster = 1
           ratio = 1/2
@@ -46,12 +48,15 @@ myConfig = ewmh . addAllMyKeys $ myConfig'
                         , focusFollowsMouse = False
                         }
 
+term :: String
+term = terminal myConfig
+
+
 addAllMyKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stringKeys
-    where keyMaskKeys = myKeys ++ myWorkspaceKeys
+    where keyMaskKeys = myKeys ++ myWorkspaceKeys ++ activities
           stringKeys = myMediaKeys
 
 myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
-         , ((modm, xK_d), changeDir myXPConfig)
          , ((controlMask, xK_Print), spawn "~/bin/screenshot win")
          , ((0, xK_Print), spawn "~/bin/screenshot scr")
          , ((modm, xK_p), shellPrompt myXPConfig)
@@ -59,6 +64,23 @@ myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
          , ((mod4Mask, xK_w), raiseBrowser)
          , ((modm, xK_f), sendMessage (Toggle "Full"))
          ]
+
+activities = [ ((mod4Mask, xK_r), rustTutorial)
+             , ((mod4Mask, xK_h), setUserDir "")
+             , ((mod4Mask, xK_x), editXmonad)
+             ]
+
+rustTutorial :: X ()
+rustTutorial = do
+    setUserDir "dev/langs/rust/hello_cargo"
+    spawnTerm
+    spawn $ term ++ " -e nix-shell -p cargo"
+        where term = terminal myConfig
+
+editXmonad :: X ()
+editXmonad = do
+    setUserDir ".xmonad"
+    spawn $ term ++ " -e vim xmonad.hs"
 
 myWorkspaceKeys =
     [((m .|. modm, k), windows $ f i)
@@ -87,3 +109,13 @@ myXPConfig = def
                 , position = Top
                 , height = 14
                 }
+
+-- Sets the current directory relative to the user home directory
+setUserDir :: String -> X ()
+setUserDir dir = catchIO $ do
+    homeDir <- getHomeDirectory
+    setCurrentDirectory (homeDir ++ "/" ++ dir)
+
+spawnTerm :: X ()
+spawnTerm = safeSpawnProg $ terminal myConfig
+
