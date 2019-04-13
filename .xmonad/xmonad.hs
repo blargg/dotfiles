@@ -12,6 +12,8 @@ import XMonad.Actions.GridSelect
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.WindowGo
 import XMonad.Util.Run
+import XMonad.Util.Dzen ((>=>), dzenConfig, timeout, onCurr, xScreen)
+import qualified XMonad.Util.Dzen as DZ
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -19,7 +21,7 @@ import XMonad.Prompt.Shell
 import XMonad.Layout
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ToggleLayouts
-
+import System.IO.Error (tryIOError, isDoesNotExistError)
 import JackStack
 
 main = do
@@ -46,6 +48,7 @@ myConfig = ewmh . addAllMyKeys $ myConfig'
                         , layoutHook = myLayout
                         , modMask = modm
                         , focusFollowsMouse = False
+                        , startupHook = message "XMonad"
                         }
 
 term :: String
@@ -68,19 +71,25 @@ myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
 activities = [ ((mod4Mask, xK_r), rustTutorial)
              , ((mod4Mask, xK_h), setUserDir "")
              , ((mod4Mask, xK_x), editXmonad)
+             , ((mod4Mask, xK_t), todoProject)
              ]
 
 rustTutorial :: X ()
 rustTutorial = do
     setUserDir "dev/langs/rust/hello_cargo"
     spawnTerm
-    spawn $ term ++ " -e nix-shell -p cargo"
-        where term = terminal myConfig
+    runInTerm "" "nix-shell -p cargo"
 
 editXmonad :: X ()
 editXmonad = do
     setUserDir ".xmonad"
-    spawn $ term ++ " -e vim xmonad.hs"
+    runEditor "xmonad.hs"
+
+todoProject :: X ()
+todoProject = do
+    setUserDir "dev/apps/TodoGraph"
+    runEditor "src/Main.hs"
+    runInTerm "" "nix-shell"
 
 myWorkspaceKeys =
     [((m .|. modm, k), windows $ f i)
@@ -112,10 +121,28 @@ myXPConfig = def
 
 -- Sets the current directory relative to the user home directory
 setUserDir :: String -> X ()
-setUserDir dir = catchIO $ do
-    homeDir <- getHomeDirectory
-    setCurrentDirectory (homeDir ++ "/" ++ dir)
+setUserDir dir = do
+    result <- io $ do
+        homeDir <- getHomeDirectory
+        tryIOError $ setCurrentDirectory (homeDir ++ "/" ++ dir)
+    case result of
+      Left err -> message $ errMsg err dir
+      Right _ -> return ()
+    where errMsg err dir = if isDoesNotExistError err
+                              then dir ++ " does not exist."
+                              else "Error moving to " ++ dir
 
 spawnTerm :: X ()
-spawnTerm = safeSpawnProg $ terminal myConfig
+spawnTerm = safeSpawnProg term
+
+runEditor :: String -> X ()
+runEditor filename = runInTerm "" (editor ++ " " ++ filename)
+    where editor = "nvim"
+
+nixShell :: String -> X ()
+nixShell command = runInTerm "" ("nix-shell " ++ command)
+
+message :: String -> X ()
+message = dzenConfig (timeout 3 >=> onCurr xScreen >=> DZ.font fontCfg)
+    where fontCfg = font myXPConfig
 
