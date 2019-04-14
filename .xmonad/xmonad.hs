@@ -89,7 +89,7 @@ todoProject :: X ()
 todoProject = do
     setUserDir "dev/apps/TodoGraph"
     runEditor "src/Main.hs"
-    runInTerm "" "nix-shell"
+    nixShell "--run ghcid"
 
 myWorkspaceKeys =
     [((m .|. modm, k), windows $ f i)
