@@ -111,9 +111,9 @@ activities = [ Activity "rustTest" xK_t "dev/langs/rust/hello_cargo" rustTutoria
 
 -- list makes key shortcuts for an activity
 activityKeys :: Activity -> [((KeyMask, KeySym), X ())]
-activityKeys Activity{keyCode=key, directory=dir, action=act}
-  = [ ((mod4Mask, key), setUserDir dir >> act)
-    , ((mod4Mask .|. shiftMask, key), setUserDir dir)
+activityKeys activity@Activity{keyCode=key}
+  = [ ((mod4Mask, key), doAction activity)
+    , ((mod4Mask .|. shiftMask, key), goDirectory activity)
     ]
 
 rustTutorial :: X ()
