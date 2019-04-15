@@ -56,7 +56,7 @@ term = terminal myConfig
 
 
 addAllMyKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stringKeys
-    where keyMaskKeys = myKeys ++ myWorkspaceKeys ++ activities
+    where keyMaskKeys = myKeys ++ myWorkspaceKeys ++ (activityKeys =<< activities)
           stringKeys = myMediaKeys
 
 myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
@@ -68,26 +68,36 @@ myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
          , ((modm, xK_f), sendMessage (Toggle "Full"))
          ]
 
-activities = [ ((mod4Mask, xK_r), rustTutorial)
-             , ((mod4Mask, xK_h), setUserDir "")
-             , ((mod4Mask, xK_x), editXmonad)
-             , ((mod4Mask, xK_t), todoProject)
+data Activity = Activity
+    { keyCode :: KeySym
+    , directory :: String
+    , action :: X()
+    }
+
+activities :: [Activity]
+activities = [ Activity xK_t "dev/langs/rust/hello_cargo" rustTutorial
+             , Activity xK_h "" (return ())
+             , Activity xK_x ".xmonad" editXmonad
+             , Activity xK_t "dev/apps/TodoGraph" todoProject
              ]
+
+-- list makes key shortcuts for an activity
+activityKeys :: Activity -> [((KeyMask, KeySym), X ())]
+activityKeys Activity{keyCode=key, directory=dir, action=act}
+  = [ ((mod4Mask, key), setUserDir dir >> act)
+    , ((mod4Mask .|. shiftMask, key), setUserDir dir)
+    ]
 
 rustTutorial :: X ()
 rustTutorial = do
-    setUserDir "dev/langs/rust/hello_cargo"
     spawnTerm
     runInTerm "" "nix-shell -p cargo"
 
 editXmonad :: X ()
-editXmonad = do
-    setUserDir ".xmonad"
-    runEditor "xmonad.hs"
+editXmonad = runEditor "xmonad.hs"
 
 todoProject :: X ()
 todoProject = do
-    setUserDir "dev/apps/TodoGraph"
     runEditor "src/Main.hs"
     nixShell "--run ghcid"
 
