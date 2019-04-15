@@ -17,11 +17,15 @@ import qualified XMonad.Util.Dzen as DZ
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
+import XMonad.Prompt.Input
 
 import XMonad.Layout
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ToggleLayouts
+
+import Data.Foldable
 import System.IO.Error (tryIOError, isDoesNotExistError)
+
 import JackStack
 
 main = do
@@ -66,19 +70,43 @@ myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
          , ((modm, xK_b), sendMessage ToggleStruts)
          , ((mod4Mask, xK_w), raiseBrowser)
          , ((modm, xK_f), sendMessage (Toggle "Full"))
+         , ((mod4Mask, xK_slash), doActivityPrompt)
+         , ((mod4Mask .|. shiftMask, xK_slash), activityDirectoryPrompt)
          ]
 
+doActivityPrompt :: X ()
+doActivityPrompt = activityPrompt ?+ doAction
+
+activityDirectoryPrompt :: X ()
+activityDirectoryPrompt = activityPrompt ?+ goDirectory
+
+activityPrompt :: X (Maybe Activity)
+activityPrompt = do
+    actName <- inputPromptWithCompl myXPConfig "Activity" (mkComplFunFromList' actNames)
+    return $ actName >>= activityByName
+    where actNames = name <$> activities
+
+activityByName :: String -> Maybe Activity
+activityByName actName = find ((== actName) . name) activities
+
+doAction :: Activity -> X ()
+doAction activity = goDirectory activity >> action activity
+
+goDirectory :: Activity -> X ()
+goDirectory = setUserDir . directory
+
 data Activity = Activity
-    { keyCode :: KeySym
+    { name :: String
+    , keyCode :: KeySym
     , directory :: String
-    , action :: X()
+    , action :: X ()
     }
 
 activities :: [Activity]
-activities = [ Activity xK_t "dev/langs/rust/hello_cargo" rustTutorial
-             , Activity xK_h "" (return ())
-             , Activity xK_x ".xmonad" editXmonad
-             , Activity xK_t "dev/apps/TodoGraph" todoProject
+activities = [ Activity "rustTest" xK_t "dev/langs/rust/hello_cargo" rustTutorial
+             , Activity "home" xK_h "" (return ())
+             , Activity "xmonad" xK_x ".xmonad" editXmonad
+             , Activity "todoGraph"xK_t "dev/apps/TodoGraph" todoProject
              ]
 
 -- list makes key shortcuts for an activity
