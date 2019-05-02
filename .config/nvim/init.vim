@@ -23,7 +23,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " General Plugins
 " Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
-Plugin 'blindFS/vim-taskwarrior'
 Plugin 'chrisbra/Recover.vim'
 Plugin 'chrisbra/SudoEdit.vim'
 Plugin 'ervandew/supertab'
@@ -48,6 +47,9 @@ Plugin 'Shougo/vimproc'
 " haskell plugins
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'dan-t/vim-hsimport'
+
+" rust plugins
+Plugin 'rust-lang/rust.vim'
 
 " fzf
 Plugin 'junegunn/fzf',{'dir':'~/.fzf','do':'./install --all'}
