@@ -103,10 +103,10 @@ data Activity = Activity
     }
 
 activities :: [Activity]
-activities = [ Activity "rustTest" xK_t "dev/langs/rust/hello_cargo" rustTutorial
-             , Activity "home" xK_h "" (return ())
+activities = [ Activity "home" xK_h "" (return ())
              , Activity "xmonad" xK_x ".xmonad" editXmonad
-             , Activity "todoGraph"xK_t "dev/apps/TodoGraph" todoProject
+             , Activity "todoGraph" xK_t "dev/apps/TodoGraph" todoProject
+             , Activity "rustTracer" xK_r "dev/graphics/rust-tracer" rustTracerAction
              ]
 
 -- list makes key shortcuts for an activity
@@ -116,11 +116,6 @@ activityKeys activity@Activity{keyCode=key}
     , ((mod4Mask .|. shiftMask, key), goDirectory activity)
     ]
 
-rustTutorial :: X ()
-rustTutorial = do
-    spawnTerm
-    runInTerm "" "nix-shell -p cargo"
-
 editXmonad :: X ()
 editXmonad = runEditor "xmonad.hs"
 
@@ -128,6 +123,12 @@ todoProject :: X ()
 todoProject = do
     runEditor "src/Main.hs"
     nixShell "--run ghcid"
+    nixShell "--run \"hoogle server --local --port 8080\""
+
+rustTracerAction :: X ()
+rustTracerAction = do
+    runInTerm "" "cargo watch --clear"
+    spawnTerm
 
 myWorkspaceKeys =
     [((m .|. modm, k), windows $ f i)
