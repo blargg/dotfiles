@@ -107,7 +107,13 @@ activities = [ Activity "home" xK_h "" (return ())
              , Activity "xmonad" xK_x ".xmonad" editXmonad
              , Activity "todoGraph" xK_t "dev/apps/TodoGraph" todoProject
              , Activity "rustTracer" xK_r "dev/graphics/rust-tracer" rustTracerAction
+             , Activity "pijul" xK_p "dev/tools/pijul" pijulAction
              ]
+
+pijulAction :: X ()
+pijulAction = do
+    spawnTerm
+    runInTerm "" "nix-shell --command \"cwatch\""
 
 -- list makes key shortcuts for an activity
 activityKeys :: Activity -> [((KeyMask, KeySym), X ())]
