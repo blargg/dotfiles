@@ -2,7 +2,7 @@
 	name = blargg
 	email = tomjankauski@gmail.com
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore
 [merge]
 	tool = fugitive
