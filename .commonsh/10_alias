@@ -1,10 +1,16 @@
 #! /bin/sh
 # aliases for all shells
 
+# common
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias cdh='urxvt -cd $(pwd) &'
+alias vim='nvim'
+
+# admin
 alias sys='systemctl'
 alias ssys='sudo systemctl'
 
+# dev
+alias cwatch="cargo watch --clear"
 alias nix-ipython='nix-shell --run ipython'
