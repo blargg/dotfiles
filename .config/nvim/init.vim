@@ -16,8 +16,8 @@ endif
 
 set nocompatible
 filetype off               " turn on later
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+set rtp+=~/.config/nvim/bundle/Vundle.vim/
+call vundle#begin('~/.config/nvim/bundle/')
 
 Plugin 'VundleVim/Vundle.vim'
 
