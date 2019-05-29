@@ -29,6 +29,7 @@ import System.IO.Error (tryIOError, isDoesNotExistError)
 import JackStack
 
 main = do
+    spawn "~/.startup"
     xmonad myConfig
 
 modm = mod1Mask
