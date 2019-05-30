@@ -32,6 +32,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'w0rp/ale'
+Plugin 'jremmen/vim-ripgrep'
+Plugin 'stefandtw/quickfix-reflector.vim'
 
 " Themes
 Plugin 'tomasr/molokai'
