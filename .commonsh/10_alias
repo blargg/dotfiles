@@ -6,6 +6,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias cdh='urxvt -cd $(pwd) &'
 alias vim='nvim'
+alias pj='pijul'
 
 # admin
 alias sys='systemctl'
