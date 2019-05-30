@@ -64,7 +64,7 @@ addAllMyKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stri
     where keyMaskKeys = myKeys ++ myWorkspaceKeys ++ (activityKeys =<< activities)
           stringKeys = myMediaKeys
 
-myKeys = [ ((modm .|. shiftMask, xK_l), spawn "~/bin/lock")
+myKeys = [ ((modm .|. shiftMask, xK_l), safeSpawnProg "slock")
          , ((controlMask, xK_Print), spawn "~/bin/screenshot win")
          , ((0, xK_Print), spawn "~/bin/screenshot scr")
          , ((modm, xK_p), shellPrompt myXPConfig)
