@@ -153,9 +153,9 @@ myWorkspaceKeys =
     , (f, m) <- [(W.greedyView, controlMask)]]
 
 myMediaKeys =
-    [ ("<XF86AudioLowerVolume>", spawn "~/bin/volume down")
-    , ("<XF86AudioRaiseVolume>", spawn "~/bin/volume up")
-    , ("<XF86AudioMute>", spawn "~/bin/volume mute")
+    [ ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -5")
+    , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
+    , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
     ]
 
 myXPConfig = def
