@@ -59,9 +59,11 @@ term :: String
 term = terminal xconfig
 
 
-addAllKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stringKeys
-    where keyMaskKeys = hotKeys ++ workspaceKeys ++ (activityKeys =<< activities)
-          stringKeys = mediaKeys
+addAllKeys config = config
+    `additionalKeys` hotKeys
+    `additionalKeys` workspaceKeys
+    `additionalKeys` (activityKeys =<< activities)
+    `additionalKeysP` mediaKeys
 
 hotKeys = [ ((modm .|. shiftMask, xK_l), safeSpawnProg "slock")
          , ((controlMask, xK_Print), spawn "~/bin/screenshot win")
@@ -73,6 +75,29 @@ hotKeys = [ ((modm .|. shiftMask, xK_l), safeSpawnProg "slock")
          , ((mod4Mask, xK_slash), doActivityPrompt)
          , ((mod4Mask .|. shiftMask, xK_slash), activityDirectoryPrompt)
          ]
+
+workspaceKeys =
+    [((m .|. modm, k), windows $ f i)
+    | (i,k) <- zip (workspaces xconfig) [xK_1..]
+    , (f,m) <- [(mruView, 0), (W.shift, shiftMask), (copy, shiftMask .|. controlMask)]
+    ]
+    ++
+    [ ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+    , (f, m) <- [(mruView, controlMask)]]
+
+-- list makes key shortcuts for an activity
+activityKeys :: Activity -> [((KeyMask, KeySym), X ())]
+activityKeys activity@Activity{keyCode=key}
+  = [ ((mod4Mask, key), doAction activity)
+    , ((mod4Mask .|. shiftMask, key), goDirectory activity)
+    ]
+
+mediaKeys =
+    [ ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -5")
+    , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
+    , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
+    ]
 
 doActivityPrompt :: X ()
 doActivityPrompt = activityPrompt ?+ doAction
@@ -120,13 +145,6 @@ characterSheetAction :: X ()
 characterSheetAction = do
     spawnTerm
 
--- list makes key shortcuts for an activity
-activityKeys :: Activity -> [((KeyMask, KeySym), X ())]
-activityKeys activity@Activity{keyCode=key}
-  = [ ((mod4Mask, key), doAction activity)
-    , ((mod4Mask .|. shiftMask, key), goDirectory activity)
-    ]
-
 editXmonad :: X ()
 editXmonad = runEditor "xmonad.hs"
 
@@ -140,16 +158,6 @@ rustTracerAction :: X ()
 rustTracerAction = do
     runInTerm "" "cargo watch --clear"
     spawnTerm
-
-workspaceKeys =
-    [((m .|. modm, k), windows $ f i)
-    | (i,k) <- zip (workspaces xconfig) [xK_1..]
-    , (f,m) <- [(mruView, 0), (W.shift, shiftMask), (copy, shiftMask .|. controlMask)]
-    ]
-    ++
-    [ ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-    | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-    , (f, m) <- [(mruView, controlMask)]]
 
 -- | When using multiple monitors, this will put the workspace for the given tag
 -- on the primary screen. The screens will be filled with the most recently
@@ -186,12 +194,6 @@ extract :: (a -> Bool) -> [a] -> Maybe (a, [a])
 extract f ls = case break f ls of
                  (left, found:right) -> Just (found, left ++ right)
                  _ -> Nothing
-
-mediaKeys =
-    [ ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -5")
-    , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
-    , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
-    ]
 
 promptConfig :: XPConfig
 promptConfig = def
