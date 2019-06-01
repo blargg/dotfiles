@@ -29,46 +29,44 @@ import System.IO.Error (tryIOError, isDoesNotExistError)
 
 import JackStack
 
+main :: IO ()
 main = do
     spawn "~/.startup"
-    xmonad myConfig
+    xmonad xconfig
 
-modm = mod1Mask
+modm = modMask xconfig
 
-myLayout =  setOptions $ tiled ||| JackStack (3/4)
+layoutConfig =  setOptions $ tiled ||| JackStack (3/4)
     where setOptions = smartBorders . avoidStruts . toggleLayouts Full
           tiled = Tall nmaster delta ratio
           nmaster = 1
           ratio = 1/2
           delta = 3/100
 
-myWorkspaces :: [WorkspaceId]
-myWorkspaces = map show [1..9::Int]
-
-myConfig = ewmh . addAllMyKeys $ myConfig'
-    where myConfig' = def
+xconfig = ewmh . addAllKeys $ xconfig'
+    where xconfig' = def
                         { terminal = "urxvt"
-                        , workspaces = myWorkspaces
+                        , workspaces = map show [1..9::Int]
                         , manageHook = manageDocks
                         , handleEventHook = handleEventHook def <+> fullscreenEventHook
-                        , layoutHook = myLayout
-                        , modMask = modm
+                        , layoutHook = layoutConfig
+                        , modMask = mod1Mask
                         , focusFollowsMouse = False
                         , startupHook = message "XMonad"
                         }
 
 term :: String
-term = terminal myConfig
+term = terminal xconfig
 
 
-addAllMyKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stringKeys
-    where keyMaskKeys = myKeys ++ myWorkspaceKeys ++ (activityKeys =<< activities)
-          stringKeys = myMediaKeys
+addAllKeys config = config `additionalKeys` keyMaskKeys `additionalKeysP` stringKeys
+    where keyMaskKeys = hotKeys ++ workspaceKeys ++ (activityKeys =<< activities)
+          stringKeys = mediaKeys
 
-myKeys = [ ((modm .|. shiftMask, xK_l), safeSpawnProg "slock")
+hotKeys = [ ((modm .|. shiftMask, xK_l), safeSpawnProg "slock")
          , ((controlMask, xK_Print), spawn "~/bin/screenshot win")
          , ((0, xK_Print), spawn "~/bin/screenshot scr")
-         , ((modm, xK_p), shellPrompt myXPConfig)
+         , ((modm, xK_p), shellPrompt promptConfig)
          , ((modm, xK_b), sendMessage ToggleStruts)
          , ((mod4Mask, xK_w), raiseBrowser)
          , ((modm, xK_f), sendMessage (Toggle "Full"))
@@ -84,7 +82,7 @@ activityDirectoryPrompt = activityPrompt ?+ goDirectory
 
 activityPrompt :: X (Maybe Activity)
 activityPrompt = do
-    actName <- inputPromptWithCompl myXPConfig "Activity" (mkComplFunFromList' actNames)
+    actName <- inputPromptWithCompl promptConfig "Activity" (mkComplFunFromList' actNames)
     return $ actName >>= activityByName
     where actNames = name <$> activities
 
@@ -143,9 +141,9 @@ rustTracerAction = do
     runInTerm "" "cargo watch --clear"
     spawnTerm
 
-myWorkspaceKeys =
+workspaceKeys =
     [((m .|. modm, k), windows $ f i)
-    | (i,k) <- zip (myWorkspaces) [xK_1..]
+    | (i,k) <- zip (workspaces xconfig) [xK_1..]
     , (f,m) <- [(mruView, 0), (W.shift, shiftMask), (copy, shiftMask .|. controlMask)]
     ]
     ++
@@ -189,13 +187,14 @@ extract f ls = case break f ls of
                  (left, found:right) -> Just (found, left ++ right)
                  _ -> Nothing
 
-myMediaKeys =
+mediaKeys =
     [ ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -5")
     , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
     , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
     ]
 
-myXPConfig = def
+promptConfig :: XPConfig
+promptConfig = def
                 { font = "-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
                 , bgColor = "black"
                 , fgColor = "white"
@@ -232,5 +231,5 @@ nixShell command = runInTerm "" ("nix-shell " ++ command)
 
 message :: String -> X ()
 message = dzenConfig (timeout 3 >=> onCurr xScreen >=> DZ.font fontCfg)
-    where fontCfg = font myXPConfig
+    where fontCfg = font promptConfig
 
