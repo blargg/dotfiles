@@ -1,11 +1,13 @@
 [user]
 	name = blargg
 	email = tomjankauski@gmail.com
+	signingkey = 0x66E27EDC0CE20DFF
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
 [merge]
 	tool = fugitive
+	verifySignatures = true
 [credential]
 	helper = cache
 [alias]
