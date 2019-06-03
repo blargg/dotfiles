@@ -1,7 +1,7 @@
 [user]
 	name = blargg
 	email = tomjankauski@gmail.com
-	signingkey = 0x66E27EDC0CE20DFF
+	signingkey = DD24 4C82 1EB2 5531 FEBD  20AC 66E2 7EDC 0CE2 0DFF
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
