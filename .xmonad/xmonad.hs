@@ -94,8 +94,8 @@ activityKeys activity@Activity{keyCode=key}
     ]
 
 mediaKeys =
-    [ ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -5")
-    , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +5")
+    [ ("<XF86AudioLowerVolume>", spawn "pulsemixer --change-volume -1")
+    , ("<XF86AudioRaiseVolume>", spawn "pulsemixer --change-volume +1")
     , ("<XF86AudioMute>", spawn "pulsemixer --toggle-mute")
     ]
 
