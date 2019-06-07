@@ -22,7 +22,7 @@ call vundle#begin('~/.config/nvim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 
 " General Plugins
-" Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
+Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
 Plugin 'chrisbra/Recover.vim'
 Plugin 'chrisbra/SudoEdit.vim'
 Plugin 'ervandew/supertab'
@@ -171,6 +171,7 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+nmap <leader>x :only<CR>
 
 nmap <c-t> :NERDTreeToggle<CR>
 
@@ -258,10 +259,11 @@ map <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
 map <Leader>lb :call LanguageClient#textDocument_references()<CR>
 map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+map <Leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
 
-" let g:LanguageClient_serverCommands = {
-"     \ 'haskell': ['hie-wrapper', '--lsp'],
-"     \ }
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rls'],
+    \ }
 
 " Haskell Import
 autocmd FileType haskell nmap <leader>im :silent update <bar> HsimportModule<CR>
