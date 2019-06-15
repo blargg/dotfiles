@@ -23,10 +23,5 @@ if [ -d "${HOME}/.zsh" ] ; then
 	done
 fi
 
-# TODO this should be removed. Manage startx differently
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-	exec startx
-fi
-
 # bind Ctrl-O to ranger-cd:
 bindkey -s '^O' '^qranger-cd\n'
