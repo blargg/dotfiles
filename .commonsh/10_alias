@@ -7,6 +7,7 @@ alias grep='grep --color=auto'
 alias cdh='urxvt -cd $(pwd) &'
 alias vim='nvim'
 alias pj='pijul'
+alias now='date "+(%a)%D  %I:%M:%S %p"'
 
 # admin
 alias sys='systemctl'
