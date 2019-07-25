@@ -30,9 +30,7 @@ import JackStack
 import qualified StackUtil as SU
 
 main :: IO ()
-main = do
-    spawn "~/.startup"
-    xmonad xconfig
+main = xmonad xconfig
 
 modm = modMask xconfig
 
