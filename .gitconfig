@@ -7,7 +7,6 @@
 	excludesfile = ~/.gitignore
 [merge]
 	tool = fugitive
-	verifySignatures = true
 [credential]
 	helper = cache
 [alias]
