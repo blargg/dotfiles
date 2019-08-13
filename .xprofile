@@ -1,3 +1,4 @@
 #!/bin/sh
 xss-lock /run/wrappers/bin/slock &
 xmodmap ~/.Xmodmap &
+numlockx &
