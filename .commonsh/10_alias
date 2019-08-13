@@ -16,3 +16,4 @@ alias ssys='sudo systemctl'
 # dev
 alias cwatch="cargo watch --clear"
 alias nix-ipython='nix-shell --run ipython'
+alias t="task"
