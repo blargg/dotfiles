@@ -34,6 +34,8 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'w0rp/ale'
 Plugin 'jremmen/vim-ripgrep'
 Plugin 'stefandtw/quickfix-reflector.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " Themes
 Plugin 'tomasr/molokai'
@@ -172,6 +174,7 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 nmap <leader>x :only<CR>
+nmap <leader>w :bdelete<CR>
 
 nmap <c-t> :NERDTreeToggle<CR>
 
@@ -223,7 +226,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " ale
 let g:ale_linters = {
-   \ 'haskell': ['ghc-mod', 'hlint', 'hie', 'hdevtools']
+   \ 'haskell': ['ghc-mod', 'hlint', 'hie']
    \}
 let g:ale_haskell_hie_executable = 'hie-wrapper'
 
@@ -263,6 +266,7 @@ map <Leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
 
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rls'],
+    \ 'haskell': ['hie-wrapper'],
     \ }
 
 " Haskell Import
