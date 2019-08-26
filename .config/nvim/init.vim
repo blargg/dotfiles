@@ -225,6 +225,7 @@ let g:airline_theme='murmur'
 let g:airline#extensions#tabline#enabled = 1
 
 " ale
+let g:ale_enabled = 0
 let g:ale_linters = {
    \ 'haskell': ['ghc-mod', 'hlint', 'hie']
    \}
@@ -254,6 +255,8 @@ augroup tags
 augroup END
 
 " LanguageClient
+let g:LanguageClient_diagnosticsEnable = 0 " disable, the updates get distracting
+
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
 map <Leader>lg :call LanguageClient#textDocument_definition()<CR>
