@@ -99,7 +99,7 @@ set secure                 " Be safe when using modeline and files
 set diffopt+=vertical
 set nomodeline             " Disable modeline
 set completeopt=menu,menuone,longest
-"set exrc                   " Load the .vimrc in the current folder too
+set spelllang=en_us
 
 let mapleader=" "    " Set leader to space
 
@@ -122,15 +122,6 @@ if has('autocmd')
          \   exe "normal g`\"" |
          \ endif
    endif
-endif
-
-" ---- Spelling ----
-if (v:version >= 700)
-   set spelllang=en_us        " US English Spelling please
-
-   " Toggle spellchecking with F10
-   nmap <silent> <F10> :silent set spell!<CR>
-   imap <silent> <F10> <C-O>:silent set spell!<CR>
 endif
 
 " Display a pretty statusline if we can
