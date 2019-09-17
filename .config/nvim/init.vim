@@ -145,6 +145,13 @@ else
    colorscheme wombat
 endif
 
+hi clear Search
+hi Search ctermbg=DarkGray guibg=DarkGray
+hi clear QuickFixLine
+hi QuickFixLine ctermbg=Black guibg=Black
+
+
+
 set list listchars=tab:»·,trail:·,extends:…,nbsp:‗
 
 if has('mouse')
@@ -168,6 +175,7 @@ nmap <leader>x :only<CR>
 nmap <leader>w :bdelete<CR>
 
 nmap <c-t> :NERDTreeToggle<CR>
+nmap <leader>m :wa <bar> make <bar> cwindow<CR>
 
 " Clear search colors
 nmap <silent> <leader>n :silent :nohlsearch<CR>
