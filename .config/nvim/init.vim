@@ -274,3 +274,26 @@ let g:LanguageClient_serverCommands = {
 " Haskell Import
 autocmd FileType haskell nmap <leader>im :silent update <bar> HsimportModule<CR>
 autocmd FileType haskell nmap <leader>is :silent update <bar> HsimportSymbol<CR>
+
+
+" like the default 'gf' command. Opens the file under the cursor. If it does not
+" exist, ask the user if they want to create the file.
+" relative set to 1: targets the file relative to the currently open file,
+" rather than pwd
+nmap gf :silent call OpenOrPrompt(0)<CR>
+function! OpenOrPrompt(relative)
+    let l:file = expand("<cfile>")
+    let l:path = expand("<cfile>:p:h")
+    if a:relative
+        " current file directory
+        let l:cfd = expand("%:h")
+        let l:file = l:cfd . "/" . l:file
+        let l:path = l:cfd . "/" . l:path
+    endif
+    if filereadable(l:file) || 1 == confirm("Create file?", "&yes\n&no")
+        if !isdirectory(path)
+            :call mkdir(path, "p")
+        endif
+        execute "edit" l:file
+    endif
+endfunction
