@@ -1,5 +1,5 @@
-URxvt*font: xft:Ubuntu Mono derivative Powerline:pixelsize=16:antialias=true
-URxvt*boldFont: xft:Ubuntu Mono derivative Powerline:bold:pixelsize=16:antialias=true
+URxvt*font: xft:DejaVu Sans Mono for Powerline:pixelsize=16:antialias=true
+URxvt*boldFont: xft:DejaVu Sans Mono for Powerline:bold:pixelsize=16:antialias=true
 URxvt*scrollstyle: plain
 URxvt*scrollBar: on
 
