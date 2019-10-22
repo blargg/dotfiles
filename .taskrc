@@ -14,7 +14,10 @@ taskd.credentials=home\/tom\/e3d21390-a5fa-49cf-8540-235e47718c1c
 taskd.trust=ignore hostname
 
 # urgency
+urgency.project.coefficient=0.0
 urgency.user.tag.later.coefficient=-5.0
+urgency.user.tag.soon.coefficient=5.0
+
 color.tag.later=gray15
 
 # contexts
