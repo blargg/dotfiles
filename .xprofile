@@ -2,3 +2,5 @@
 xss-lock /run/wrappers/bin/slock &
 xmodmap ~/.Xmodmap &
 numlockx &
+dunst &
+udiskie &
