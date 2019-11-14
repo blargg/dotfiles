@@ -34,7 +34,7 @@ main = xmonad xconfig
 
 modm = modMask xconfig
 
-layoutConfig =  setOptions $ tiled ||| JackStack (3/4)
+layoutConfig =  setOptions $ tiled ||| JackStack (9/10)
     where setOptions = smartBorders . avoidStruts . toggleLayouts Full
           tiled = Tall nmaster delta ratio
           nmaster = 1
