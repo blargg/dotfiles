@@ -280,7 +280,7 @@ autocmd FileType haskell nmap <leader>is :silent update <bar> HsimportSymbol<CR>
 " exist, ask the user if they want to create the file.
 " relative set to 1: targets the file relative to the currently open file,
 " rather than pwd
-nmap gf :silent call OpenOrPrompt(0)<CR>
+nmap <silent> gf :call OpenOrPrompt(0)<CR>
 function! OpenOrPrompt(relative)
     let l:file = expand("<cfile>")
     let l:path = expand("<cfile>:p:h")
@@ -290,7 +290,7 @@ function! OpenOrPrompt(relative)
         let l:file = l:cfd . "/" . l:file
         let l:path = l:cfd . "/" . l:path
     endif
-    if filereadable(l:file) || 1 == confirm("Create file?", "&yes\n&no")
+    if filereadable(l:file) || 1 == confirm("Create file " . l:file . "?", "&yes\n&no")
         if !isdirectory(path)
             :call mkdir(path, "p")
         endif
