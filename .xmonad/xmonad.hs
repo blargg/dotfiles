@@ -64,8 +64,8 @@ addAllKeys config = config
     `additionalKeysP` mediaKeys
 
 hotKeys = [ ((modm .|. shiftMask, xK_l), safeSpawnProg "slock")
-         , ((controlMask, xK_Print), spawn "~/bin/screenshot win")
-         , ((0, xK_Print), spawn "~/bin/screenshot scr")
+         , ((controlMask, xK_Print), spawn "sleep 0.05; screen_copy")
+         , ((0, xK_Print), spawn "scrot ~/media/pictures/screen_shots/shot.png")
          , ((modm, xK_p), shellPrompt promptConfig)
          , ((modm, xK_b), sendMessage ToggleStruts)
          , ((mod4Mask, xK_w), raiseBrowser)
