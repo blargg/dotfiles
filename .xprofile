@@ -1,4 +1,5 @@
 #!/bin/sh
+[ -f .xlocal ] && ./.xlocal &
 xss-lock /run/wrappers/bin/slock &
 xmodmap ~/.Xmodmap &
 numlockx &
