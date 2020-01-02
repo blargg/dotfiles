@@ -175,7 +175,7 @@ nmap <leader>x :only<CR>
 nmap <leader>w :bdelete<CR>
 
 nmap <c-t> :NERDTreeToggle<CR>
-nmap <leader>m :wa <bar> make <bar> cwindow<CR>
+nmap <leader>m :wa <bar> make <bar> cwindow<CR><CR>
 
 " Clear search colors
 nmap <silent> <leader>n :silent :nohlsearch<CR>
