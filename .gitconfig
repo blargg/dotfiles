@@ -22,5 +22,3 @@
 	ui = auto
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
-[commit]
-	gpgsign = true
