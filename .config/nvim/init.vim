@@ -100,6 +100,7 @@ set diffopt+=vertical
 set nomodeline             " Disable modeline
 set completeopt=menu,menuone,longest
 set spelllang=en_us
+set nostartofline
 
 let mapleader=" "    " Set leader to space
 
@@ -116,12 +117,10 @@ filetype plugin on      " Load filetype plugins
 
 " Open file to last spot
 if has('autocmd')
-   if has('viminfo')
-      autocmd BufReadPost *
-         \ if line("'\"") > 0 && line("'\"") <= line("$") |
-         \   exe "normal g`\"" |
-         \ endif
-   endif
+  autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal g`\"" |
+     \ endif
 endif
 
 " Display a pretty statusline if we can
