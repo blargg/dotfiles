@@ -2,6 +2,7 @@
 # variables for use
 export BROWSER="firefox"
 export EDITOR="nvim"
+export PAGER="less"
 export PATH="$PATH:$HOME/.local/bin"
 
 eval $(dircolors -b ~/.dircolors)
