@@ -36,6 +36,7 @@ Plugin 'jremmen/vim-ripgrep'
 Plugin 'stefandtw/quickfix-reflector.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'dkarter/bullets.vim'
 
 " Themes
 Plugin 'tomasr/molokai'
