@@ -8,6 +8,7 @@ alias cdh='urxvt -cd $(pwd) &'
 alias vim='nvim'
 alias pj='pijul'
 alias now='date "+(%a)%D  %I:%M:%S %p"'
+alias nixpkgs='nix repl "<nixpkgs>"'
 
 # admin
 alias sys='systemctl'
@@ -17,4 +18,6 @@ alias ssys='sudo systemctl'
 alias cwatch="cargo watch --clear"
 alias nix-ipython='nix-shell --run ipython'
 alias t="task"
+alias i="task +inbox"
+alias ts="task +soon"
 alias tw="timew"
