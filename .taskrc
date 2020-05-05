@@ -19,10 +19,9 @@ urgency.user.tag.later.coefficient=-5.0
 urgency.user.tag.soon.coefficient=5.0
 
 color.tag.later=gray15
-
-# contexts
-context.game=project:game
-context.website=project:website
+color.tagged=
+color.tag.soon=rgb031
+color.tag.soon2=rgb031
 
 # review
 uda.reviewed.type=date
