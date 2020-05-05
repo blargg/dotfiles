@@ -14,6 +14,9 @@ set $term urxvt
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 hide_edge_borders --i3 smart
 
+# exec mako
+exec udiskie
+
 ### Output configuration
 output DVI-I-1 mode 1920x1080@144.001007Hz
 
@@ -155,9 +158,9 @@ bindsym $mod+minus scratchpad show
 
 # Media Keys
 bindsym XF86AudioRaiseVolume exec \
-    pactl set-sink-volume @DEFAULT_SINK@ +1%
+    pactl set-sink-volume @DEFAULT_SINK@ +3%
 bindsym XF86AudioLowerVolume exec \
-    pactl set-sink-volume @DEFAULT_SINK@ -1%
+    pactl set-sink-volume @DEFAULT_SINK@ -3%
 bindsym XF86AudioMute exec \
     pactl set-sink-mute @DEFAULT_SINK@ toggle
 
