@@ -16,51 +16,50 @@ endif
 
 set nocompatible
 filetype off               " turn on later
-set rtp+=~/.config/nvim/bundle/Vundle.vim/
-call vundle#begin('~/.config/nvim/bundle/')
+call plug#begin(stdpath('data') . '/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 
 " General Plugins
-Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
-Plugin 'chrisbra/Recover.vim'
-Plugin 'chrisbra/SudoEdit.vim'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'w0rp/ale'
-Plugin 'jremmen/vim-ripgrep'
-Plugin 'stefandtw/quickfix-reflector.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'dkarter/bullets.vim'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
+Plug 'chrisbra/Recover.vim'
+Plug 'chrisbra/SudoEdit.vim'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/nerdtree'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-unimpaired'
+Plug 'w0rp/ale'
+Plug 'jremmen/vim-ripgrep'
+Plug 'stefandtw/quickfix-reflector.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'dkarter/bullets.vim'
 
 " Themes
-Plugin 'tomasr/molokai'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-scripts/wombat256.vim'
-Plugin 'vim-scripts/Wombat'
+Plug 'tomasr/molokai'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/wombat256.vim'
+Plug 'vim-scripts/Wombat'
 
 " Vim plugins
-Plugin 'LnL7/vim-nix'
-Plugin 'Shougo/vimproc'
+Plug 'LnL7/vim-nix'
+Plug 'Shougo/vimproc'
 
 " haskell plugins
-Plugin 'neovimhaskell/haskell-vim'
-Plugin 'dan-t/vim-hsimport'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'dan-t/vim-hsimport'
 
 " rust plugins
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 
 " fzf
-Plugin 'junegunn/fzf',{'dir':'~/.fzf','do':'./install --all'}
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf',{'dir':'~/.fzf','do':'./install --all'}
+Plug 'junegunn/fzf.vim'
 
-call vundle#end()
+call plug#end()
 
 " ---- General Setup ----
 set ttyfast
