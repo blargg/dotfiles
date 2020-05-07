@@ -282,16 +282,15 @@ autocmd FileType haskell nmap <leader>is :silent update <bar> HsimportSymbol<CR>
 nmap <silent> gf :call OpenOrPrompt(0)<CR>
 function! OpenOrPrompt(relative)
     let l:file = expand("<cfile>")
-    let l:path = expand("<cfile>:p:h")
     if a:relative
         " current file directory
         let l:cfd = expand("%:h")
         let l:file = l:cfd . "/" . l:file
-        let l:path = l:cfd . "/" . l:path
     endif
     if filereadable(l:file) || 1 == confirm("Create file " . l:file . "?", "&yes\n&no")
-        if !isdirectory(path)
-            :call mkdir(path, "p")
+        let l:path = fnamemodify(l:file,":p:h")
+        if !isdirectory(l:path)
+            :call mkdir(l:path, "p")
         endif
         execute "edit" l:file
     endif
