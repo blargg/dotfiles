@@ -56,7 +56,7 @@ Plug 'dan-t/vim-hsimport'
 Plug 'rust-lang/rust.vim'
 
 " fzf
-Plug 'junegunn/fzf',{'dir':'~/.fzf','do':'./install --all'}
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
