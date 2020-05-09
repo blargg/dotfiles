@@ -25,7 +25,6 @@ Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
 Plug 'chrisbra/Recover.vim'
 Plug 'chrisbra/SudoEdit.vim'
 Plug 'ervandew/supertab'
-Plug 'scrooloose/nerdtree'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -173,7 +172,6 @@ map <c-h> <c-w>h
 nmap <leader>x :only<CR>
 nmap <leader>w :bdelete<CR>
 
-nmap <c-t> :NERDTreeToggle<CR>
 nmap <leader>m :wa <bar> make <bar> cwindow<CR><CR>
 
 " Clear search colors
