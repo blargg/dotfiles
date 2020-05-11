@@ -232,6 +232,7 @@ let g:ale_haskell_hie_executable = 'hie-wrapper'
 " fzf settings
 nmap <c-p> :Files<CR>
 nmap <leader>p :Files<CR>
+nmap <leader>f :Buffers<CR>
 nmap <leader>g :GitFiles --others -c --exclude-standard<CR>
 nmap <leader>. :Tags<CR>
 
