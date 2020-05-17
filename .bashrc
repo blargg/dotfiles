@@ -1,10 +1,6 @@
 
 # load shell settings
-if [ -d "${HOME}/.commonsh" ] ; then
-	for file in $HOME/.commonsh/* ; do
-		. "$file"
-	done
-fi
+. $HOME/.commonsh/import.sh
 
 # fix TERMINFO for nix shell
 if [ -n "$IN_NIX_SHELL" ]; then

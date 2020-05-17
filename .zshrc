@@ -9,19 +9,8 @@ watch=( all )
 export LOGCHECK=30
 export WATCHFMT=$'\e[00;00m\e[01;36m'" -- %n@%m has %(a.logged in.logged out) --"$'\e[00;00m'
 
-# load shell settings
-if [ -d "${HOME}/.commonsh" ] ; then
-	for file in $HOME/.commonsh/* ; do
-		source "$file"
-	done
-fi
-
-# load zsh specific files
-if [ -d "${HOME}/.zsh" ] ; then
-	for file in $HOME/.zsh/* ; do
-		source "$file"
-	done
-fi
+source $HOME/.commonsh/import.sh
+source $HOME/.zsh/import
 
 bindkey -v
 # bind Ctrl-O to ranger-cd:
