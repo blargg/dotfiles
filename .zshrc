@@ -12,10 +12,6 @@ export WATCHFMT=$'\e[00;00m\e[01;36m'" -- %n@%m has %(a.logged in.logged out) --
 source $HOME/.commonsh/import.sh
 source $HOME/.zsh/import
 
-bindkey -v
-# bind Ctrl-O to ranger-cd:
-bindkey -s '^O' '^qranger-cd\n'
-
 # zle: update VIMMODE on mode chagne
 function zle-line-init zle-keymap-select {
     vimode="${${KEYMAP/vicmd/[n]}/(main|viins)/[i]}"

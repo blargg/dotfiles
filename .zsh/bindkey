@@ -1,11 +1,9 @@
+bindkey -v
+
+# bind Ctrl-O to ranger-cd:
+bindkey -s '^O' '^qranger-cd\n'
+
 # keybindings
-bindkey -d
-bindkey -e
-
-bindkey ' ' magic-space
-
-bindkey -M emacs '\ee' edit-command-line
-
 case $TERM in
 	screen*|xterm*|putty*)
 		bindkey '^[[Z' reverse-menu-complete
