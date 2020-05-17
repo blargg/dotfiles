@@ -23,9 +23,9 @@ if [ -d "${HOME}/.zsh" ] ; then
 	done
 fi
 
+bindkey -v
 # bind Ctrl-O to ranger-cd:
 bindkey -s '^O' '^qranger-cd\n'
-bindkey -v
 
 # zle: update VIMMODE on mode chagne
 function zle-line-init zle-keymap-select {
