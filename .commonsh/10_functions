@@ -21,3 +21,11 @@ function genpass() {
 	dd if=/dev/urandom count=1 2>/dev/null | tr -cd 'A-Za-z0-9!@#$%^&*()_+' |
 		cut -c-$1
 }
+
+function "task_advancetime"() {
+    task +soon2 mod -soon2 +soon
+}
+
+function td() {
+    task $@ mod -soon -soon2 +today
+}

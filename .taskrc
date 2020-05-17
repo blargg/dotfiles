@@ -17,9 +17,11 @@ taskd.trust=ignore hostname
 urgency.project.coefficient=0.0
 urgency.user.tag.later.coefficient=-5.0
 urgency.user.tag.soon.coefficient=5.0
+urgency.user.tag.today.coefficient=7.0
 
 color.tag.later=gray15
 color.tagged=
+color.tag.today=yellow
 color.tag.soon=rgb031
 color.tag.soon2=rgb031
 
