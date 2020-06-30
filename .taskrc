@@ -24,6 +24,7 @@ color.tagged=
 color.tag.today=yellow
 color.tag.soon=rgb031
 color.tag.soon2=rgb031
+color.tag.mindful=magenta
 
 # review
 uda.reviewed.type=date
