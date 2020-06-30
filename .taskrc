@@ -10,8 +10,8 @@ taskd.certificate=\/home\/tom\/.task\/keys\/public.cert
 taskd.key=\/home\/tom\/.task\/keys\/private.key
 taskd.ca=\/home\/tom\/.task\/keys\/ca.cert
 taskd.server=www.tomjankauski.com:53589
-taskd.credentials=home\/tom\/e3d21390-a5fa-49cf-8540-235e47718c1c
-taskd.trust=ignore hostname
+taskd.credentials=home\/tom\/4e80373a-feec-44ab-b945-542ce2747549
+# taskd.trust=ignore hostname
 
 # urgency
 urgency.project.coefficient=0.0
