@@ -48,7 +48,7 @@ xconfig = ewmh . addAllKeys $ xconfig'
                         , manageHook = manageDocks
                         , handleEventHook = handleEventHook def <+> fullscreenEventHook
                         , layoutHook = layoutConfig
-                        , modMask = mod1Mask
+                        , modMask = mod4Mask
                         , focusFollowsMouse = False
                         , startupHook = message "XMonad"
                         }
