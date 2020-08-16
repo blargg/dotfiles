@@ -22,7 +22,7 @@ function genpass() {
 		cut -c-$1
 }
 
-function "task_advancetime"() {
+function task.advancetime() {
     task +soon2 mod -soon2 +soon
 }
 
