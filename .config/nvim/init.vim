@@ -38,6 +38,7 @@ Plug 'dkarter/bullets.vim'
 
 " Themes
 Plug 'tomasr/molokai'
+Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/wombat256.vim'
@@ -134,9 +135,9 @@ endif
 
 " Set colorscheme
 if has("gui_running")
-   colorscheme molokai
+   colorscheme onedark
 elseif &t_Co == 256
-   colorscheme molokai
+   colorscheme onedark
 elseif &t_Co == 88
    colorscheme wombat
 else
