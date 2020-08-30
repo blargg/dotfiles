@@ -29,3 +29,8 @@ function task.advancetime() {
 function td() {
     task $@ mod -soon -soon2 +today
 }
+
+# Tmux workspaces
+function mxa () {
+  tmux new-session -A -s $1
+}

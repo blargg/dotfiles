@@ -9,6 +9,7 @@ alias vim='nvim'
 alias pj='pijul'
 alias now='date "+(%a)%D  %I:%M:%S %p"'
 alias nixpkgs='nix repl "<nixpkgs>"'
+alias mx='tmux'
 
 # admin
 alias sys='systemctl'
