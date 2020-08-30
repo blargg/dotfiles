@@ -18,6 +18,7 @@ urgency.project.coefficient=0.0
 urgency.user.tag.later.coefficient=-5.0
 urgency.user.tag.soon.coefficient=5.0
 urgency.user.tag.today.coefficient=7.0
+urgency.scheduled.coefficient=6.0
 
 color.tag.later=gray15
 color.tagged=
@@ -33,6 +34,3 @@ report._reviewed.description=Tasksh review report.  Adjust the filter to your ne
 report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
-
-# formats
-dateformat=m/d/y
