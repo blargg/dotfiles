@@ -21,7 +21,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'VundleVim/Vundle.vim'
 
 " General Plugins
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chrisbra/Recover.vim'
 Plug 'chrisbra/SudoEdit.vim'
 Plug 'ervandew/supertab'
@@ -270,12 +270,30 @@ map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 map <Leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rls'],
-    \ 'haskell': ['hie-wrapper'],
-    \ 'tsx': ['typescript-language-server'],
-    \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
-    \ }
+" CoC keys
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> rn <Plug>(coc-rename)
+xnoremap <leader>f <Plug>(coc-format-selected)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+command! -nargs=0 Format :call CocAction('format')
 
 " Haskell Import
 autocmd FileType haskell nmap <leader>im :silent update <bar> HsimportModule<CR>
