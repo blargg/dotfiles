@@ -55,6 +55,10 @@ Plug 'dan-t/vim-hsimport'
 " rust plugins
 Plug 'rust-lang/rust.vim'
 
+" Web Dev
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 " fzf
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -269,6 +273,8 @@ map <Leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rls'],
     \ 'haskell': ['hie-wrapper'],
+    \ 'tsx': ['typescript-language-server'],
+    \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
     \ }
 
 " Haskell Import
