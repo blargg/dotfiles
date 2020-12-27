@@ -105,6 +105,8 @@ set nomodeline             " Disable modeline
 set completeopt=menu,menuone,longest
 set spelllang=en_us
 set nostartofline
+set encoding=UTF-8
+set fileencoding=UTF-8
 
 let mapleader=" "    " Set leader to space
 
