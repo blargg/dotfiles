@@ -301,6 +301,9 @@ command! -nargs=0 Format :call CocAction('format')
 autocmd FileType haskell nmap <leader>im :silent update <bar> HsimportModule<CR>
 autocmd FileType haskell nmap <leader>is :silent update <bar> HsimportSymbol<CR>
 
+" Supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 
 " like the default 'gf' command. Opens the file under the cursor. If it does not
 " exist, ask the user if they want to create the file.
