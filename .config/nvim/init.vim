@@ -35,6 +35,7 @@ Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'dkarter/bullets.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Themes
 Plug 'tomasr/molokai'
