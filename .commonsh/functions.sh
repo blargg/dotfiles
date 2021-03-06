@@ -23,11 +23,11 @@ function genpass() {
 }
 
 function task.advancetime() {
-    task +soon2 mod -soon2 +soon
+    task planned:soon2 mod planned:soon
 }
 
 function td() {
-    task $@ mod -soon -soon2 +today
+    task $@ mod planned:today
 }
 
 # Tmux workspaces

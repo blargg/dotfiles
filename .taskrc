@@ -13,6 +13,10 @@ taskd.server=www.tomjankauski.com:53589
 taskd.credentials=home\/tom\/4e80373a-feec-44ab-b945-542ce2747549
 # taskd.trust=ignore hostname
 
+# Next Report
+report.next.labels=ID,Active,Age,Deps,P,Project,Plnd,Tag,Recur,S,Due,Until,Description,Urg
+report.next.columns=id,start.age,entry.age,depends,priority,project,planned,tags,recur,scheduled.countdown,due.relative,until.remaining,description,urgency
+
 # urgency
 urgency.project.coefficient=0.0
 urgency.user.tag.later.coefficient=-5.0
@@ -34,3 +38,16 @@ report._reviewed.description=Tasksh review report.  Adjust the filter to your ne
 report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+
+# UDA Planned
+# Represents when the task is planned to be done
+# Today, Soon (this week approx), Soon2 (when this week clears)
+uda.planned.type=string
+uda.planned.label=Planned
+uda.planned.values=today,soon,soon2
+color.uda.planned.today=yellow
+color.uda.planned.soon=rgb031
+color.uda.planned.soon2=rgb031
+urgency.uda.planned.today.coefficient=7.0
+urgency.uda.planned.soon.coefficient=5.0
+urgency.uda.planned.soon2.coefficient=1.0
