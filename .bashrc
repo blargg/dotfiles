@@ -10,4 +10,5 @@ if [ -n "$IN_NIX_SHELL" ]; then
     real_TERM=$TERM; TERM=xterm; TERM=$real_TERM; unset real_TERM
 fi
 
+set -o vi
 [ -x "$(command -v zoxide)" ] && eval "$(zoxide init bash)"
