@@ -1,3 +1,5 @@
 #! /usr/bin/env zsh
+autoload -U zcalc
+
 [ -x "$(command -v zoxide)" ] && eval "$(zoxide init zsh)"
 [ -x "$(command -v direnv)" ] && eval "$(direnv hook zsh)"

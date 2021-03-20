@@ -1,4 +1,4 @@
-# /usr/bin/env sh
+# /usr/bin/env zsh
 
 # Import all zsh settings
 source $HOME/.zsh/options
@@ -6,3 +6,4 @@ source $HOME/.zsh/style
 source $HOME/.zsh/completion
 source $HOME/.zsh/config
 source $HOME/.zsh/bindkey
+source $HOME/.zsh/watch
