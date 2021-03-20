@@ -18,6 +18,7 @@
 	co = checkout
 	df = diff
 	lg = log -p
+	root = rev-parse --show-toplevel
 [color]
 	ui = auto
 [mergetool "fugitive"]
