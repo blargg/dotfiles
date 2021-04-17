@@ -1,5 +1,13 @@
 {
     "rust-analyzer.serverPath": "~/.nix-profile/bin/rust-analyzer",
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-    "rust-analyzer.procMacro.enable": true
+    "rust-analyzer.procMacro.enable": true,
+    "languageserver": {
+      "nix": {
+        "command": "rnix-lsp",
+        "filetypes": [
+          "nix"
+        ]
+      }
+    }
 }
