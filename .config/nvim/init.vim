@@ -18,8 +18,6 @@ set nocompatible
 filetype off               " turn on later
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'VundleVim/Vundle.vim'
-
 " General Plugins
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chrisbra/Recover.vim'
@@ -29,7 +27,6 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-unimpaired'
-Plug 'w0rp/ale'
 Plug 'jremmen/vim-ripgrep'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'SirVer/ultisnips'
@@ -50,8 +47,8 @@ Plug 'LnL7/vim-nix'
 Plug 'Shougo/vimproc'
 
 " haskell plugins
-Plug 'neovimhaskell/haskell-vim'
-Plug 'dan-t/vim-hsimport'
+" Plug 'neovimhaskell/haskell-vim'
+" Plug 'dan-t/vim-hsimport'
 
 " rust plugins
 Plug 'rust-lang/rust.vim'
