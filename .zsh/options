@@ -1,5 +1,6 @@
 #! /usr/bin/env zsh
 setopt LIST_ROWS_FIRST
+setopt histignorespace
 
 # share history
 export HISTSIZE=1000
