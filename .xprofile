@@ -5,3 +5,14 @@ xmodmap ~/.Xmodmap &
 numlockx &
 dunst &
 udiskie &
+
+
+# Example setting mouse speed
+# xinput set-prop 10 158 0.05 0 0 0 0.05 0 0 0 1
+#                 ^  ^   ^
+#                 |  |   | matrix to transform
+#                    property for the transform
+#                 mouse device
+
+# Disable mouse acceleration.
+# xset m 0 0 &
