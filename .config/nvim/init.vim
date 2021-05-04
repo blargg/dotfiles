@@ -33,6 +33,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'dkarter/bullets.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'sjl/gundo.vim'
 
 " Themes
 Plug 'tomasr/molokai'
