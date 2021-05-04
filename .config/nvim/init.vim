@@ -102,6 +102,7 @@ set secure                 " Be safe when using modeline and files
 set diffopt+=vertical
 set nomodeline             " Disable modeline
 set completeopt=menu,menuone,longest
+set spell
 set spelllang=en_us
 set nostartofline
 set encoding=UTF-8
