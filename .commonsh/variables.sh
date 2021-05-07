@@ -1,6 +1,6 @@
 #! /bin/sh
 # variables for use
-export BROWSER="chromium"
+export BROWSER="google-chrome-stable"
 export EDITOR="nvim"
 export PAGER="less"
 export PATH="$PATH:$HOME/.local/bin"
