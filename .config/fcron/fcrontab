@@ -1,0 +1,2 @@
+&bootrun 0 0 * * 1 task add pl:today plan week
+&bootrun 0 0 * * 3,6 task add pl:today shave
