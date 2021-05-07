@@ -8,4 +8,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export _ZO_EXCLUDE_DIRS="$HOME/private"
 
+# In memory only history
+unset HISTFILE
+
 eval $(dircolors -b ~/.dircolors)

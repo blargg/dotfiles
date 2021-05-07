@@ -12,3 +12,5 @@ fi
 
 set -o vi
 [ -x "$(command -v zoxide)" ] && eval "$(zoxide init bash)"
+
+unset HISTFILE
