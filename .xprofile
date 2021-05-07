@@ -8,11 +8,8 @@ udiskie &
 
 
 # Example setting mouse speed
-# xinput set-prop 10 158 0.05 0 0 0 0.05 0 0 0 1
-#                 ^  ^   ^
-#                 |  |   | matrix to transform
-#                    property for the transform
-#                 mouse device
+# Switch razer with the name of the mouse found in `xinput list`
+# xinput set-prop "Razer Razer DeathAdder" "Coordinate Transformation Matrix" 0.05 0 0 0 0.05 0 0 0 1
 
 # Disable mouse acceleration.
 # xset m 0 0 &
