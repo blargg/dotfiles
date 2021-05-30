@@ -58,6 +58,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+
 " fzf
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
