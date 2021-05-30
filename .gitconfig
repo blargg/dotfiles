@@ -22,6 +22,6 @@
 [color]
 	ui = auto
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [pull]
 	rebase = true
