@@ -284,6 +284,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> rn <Plug>(coc-rename)
 xnoremap <leader>f <Plug>(coc-format-selected)
+nmap <leader>ac  <Plug>(coc-codeaction)
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
