@@ -34,3 +34,8 @@ function td() {
 function mxa () {
   tmux new-session -A -s $1
 }
+
+function git.push-bare () {
+    git init $2 --bare
+    git remote add $1 $2
+}
