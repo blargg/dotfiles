@@ -10,7 +10,7 @@ taskd.certificate=\/home\/tom\/.task\/keys\/public.cert
 taskd.key=\/home\/tom\/.task\/keys\/private.key
 taskd.ca=\/home\/tom\/.task\/keys\/ca.cert
 taskd.server=www.tomjankauski.com:53589
-taskd.credentials=home\/tom\/4e80373a-feec-44ab-b945-542ce2747549
+taskd.credentials=home\/tom\/7e47a51e-b29f-46d7-a730-32af6bf6d953
 # taskd.trust=ignore hostname
 
 # Next Report
