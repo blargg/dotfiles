@@ -7,3 +7,4 @@ source $HOME/.zsh/completion
 source $HOME/.zsh/config
 source $HOME/.zsh/bindkey
 source $HOME/.zsh/watch
+source $HOME/.zsh/private/all
