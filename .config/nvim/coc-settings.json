@@ -2,6 +2,7 @@
     "rust-analyzer.serverPath": "/run/current-system/sw/bin/rust-analyzer",
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
     "languageserver": {
       "nix": {
         "command": "rnix-lsp",
