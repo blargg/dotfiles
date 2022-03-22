@@ -57,6 +57,7 @@ bindsym $mod+t [title="^scratchpad_term"] scratchpad show
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+mouse_warping none
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
