@@ -37,6 +37,24 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# User playerctl to send commands to media
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# Calcualtor
+exec --no-startup-id urxvt -title 'calc' -e 'julia'
+for_window [title="^calc"] move scratchpad
+bindsym XF86Calculator [title="^calc"] scratchpad show
+
+# Scratchpad Terminal
+exec --no-startup-id urxvt -title 'scratchpad_term'
+# To resize the menu, to put it at the top. Use ppt to get percentages of the
+# screen
+# for_window [] floating enable, resize set 1000
+for_window [title="^scratchpad_term"] move scratchpad
+bindsym $mod+t [title="^scratchpad_term"] scratchpad show
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
