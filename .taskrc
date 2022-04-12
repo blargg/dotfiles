@@ -62,3 +62,5 @@ context.work.read=-ent -fun
 context.work.write=-ent -fun
 context.fun.read=+ent or +fun
 context.fun.write=+fun
+context.home.read=project:home
+context.home.write=project:home
