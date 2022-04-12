@@ -34,6 +34,7 @@ Plug 'honza/vim-snippets'
 Plug 'dkarter/bullets.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'sjl/gundo.vim'
+Plug 'adelarsq/Vim-Autoclose'
 
 " Themes
 Plug 'tomasr/molokai'
@@ -53,6 +54,7 @@ Plug 'Shougo/vimproc'
 
 " rust plugins
 Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml', { 'branch': 'main' }
 
 " Web Dev
 Plug 'leafgarland/typescript-vim'
@@ -64,6 +66,9 @@ Plug 'hashivim/vim-terraform'
 " fzf
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
+" Markdown
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
