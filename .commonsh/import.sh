@@ -6,3 +6,4 @@
 . $HOME/.commonsh/variables.sh
 . $HOME/.commonsh/functions.sh
 . $HOME/.commonsh/aliases.sh
+. $HOME/.commonsh/nix.sh
