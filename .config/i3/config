@@ -45,6 +45,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Screenshot
 bindsym Print exec scrot ~/media/pictures/screen_shots/%F_%T.png
+bindsym Control+Print exec screen_copy
 
 # Calcualtor
 exec --no-startup-id urxvt -title 'calc' -e 'julia'
@@ -128,6 +129,9 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+# Move workspaces between screens
+bindsym $mod+u move workspace to output right
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
