@@ -26,9 +26,6 @@ urgency.scheduled.coefficient=6.0
 
 color.tag.later=gray15
 color.tagged=
-color.tag.today=yellow
-color.tag.soon=rgb031
-color.tag.soon2=rgb031
 color.tag.mindful=magenta
 
 # review
@@ -47,7 +44,6 @@ uda.planned.label=Planned
 uda.planned.values=today,soon,soon2
 color.uda.planned.today=yellow
 color.uda.planned.soon=rgb031
-color.uda.planned.soon2=rgb031
 urgency.uda.planned.today.coefficient=7.0
 urgency.uda.planned.soon.coefficient=5.0
 urgency.uda.planned.soon2.coefficient=1.0
