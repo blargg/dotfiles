@@ -1,4 +1,4 @@
 &bootrun 0 0 * * 1 /run/current-system/sw/bin/task add pl:today plan week, and goals
-&bootrun 0 0 * * 3,6 /run/current-system/sw/bin/task add pl:today shave
+&bootrun 0 0 1 * 0 /run/current-system/sw/bin/task add pl:soon "clean the house"
 &bootrun 0 0 1 1,4,7,10 * /run/current-system/sw/bin/task add +next review goals, and long term goals
 &bootrun 0 0 1 * * /run/current-system/sw/bin/task add +next 'update and plan finances'
