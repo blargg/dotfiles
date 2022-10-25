@@ -38,6 +38,9 @@ font pango:monospace 8
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # exec --no-startup-id nm-applet
 
+# Start on login
+exec udiskie
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -51,8 +54,8 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Screenshot
-bindsym Print exec scrot ~/media/pictures/screen_shots/%F_%T.png
-bindsym Control+Print exec screen_copy
+bindsym Print exec --no-startup-id scrot ~/media/pictures/screen_shots/%F_%T.png
+bindsym Control+Print exec --no-startup-id screen_copy
 
 # Calcualtor
 exec --no-startup-id urxvt -title 'calc' -e 'julia'
